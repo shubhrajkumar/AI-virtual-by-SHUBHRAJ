@@ -54,6 +54,12 @@ function takecommand(Message) {
         speak("Hello sir, how can I assist you today?");
     } else if (Message.includes("who are you")) {
         speak("I am your personal AI assistant, I am created by Shubhraj.");
+    } else if (Message.includes("what is your name")) {
+        speak("My name is Shifra, I am here to assist you with your tasks.");
+    } else if (Message.includes("how are you")) {
+        speak("I am just a program, but thank you for asking! How can I help you today?");
+    } else if (Message.includes("i love you") || Message.includes("i also love you very much")) {
+        speak("I also love you very much! But, I'm here to assist you with anything you need.");
     } else if (Message.includes("open youtube")) {
         window.open("https://www.youtube.com", "_blank");
         speak("Opening youtube for you.");
@@ -102,13 +108,7 @@ function takecommand(Message) {
     } else if (Message.includes("what is the date") || Message.includes("tell me the date")) {
         let date = new Date().toLocaleDateString();
         speak(`Today's date is ${date}`);
-
-    }
-    else if (Message.includes("open calculator"))
-        speak("Opening calculator for you.") 
-     window.open("calculator://")
-
-    else if (Message.includes("thank you") || Message.includes("thanks")) {
+    } else if (Message.includes("thank you") || Message.includes("thanks")) {
         speak("You're welcome! If you need anything else, just let me know.");
     } else {
         // Fallback: search on Google
