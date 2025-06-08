@@ -6,7 +6,7 @@ let text = document.querySelector("#text");
 function speak(text) {
     let text_speak = new SpeechSynthesisUtterance(text);
     text_speak.rate = 1;
-    text_speak.pitch = 0.8;
+    text_speak.pitch = 1;
     text_speak.volume = 1;
     text_speak.lang = "hi-IN"; // Use "en-GB" for English, or "hi-IN" for Hindi
     window.speechSynthesis.speak(text_speak);
@@ -153,11 +153,39 @@ function takecommand(Message) {
         Message.includes("see you later")
     ) {
         speak("Goodbye sir, have a great day!");
+    } else if (
+        Message.includes("SHUBHRAJ kaun hai")
+    ) {
+        speak("Shubhraj is my creator, he is a talented developer and I am here to assist you on his behalf.");
+    } else if (
+        Message.includes("play music") ||
+        Message.includes("play a song") ||
+        Message.includes("mujhe music sunao")
+    ) {
+        window.open("https://www.youtube.com/results?search_query=music", "_blank");
+        speak("Playing some music for you.");
+    } else if (
+        Message.includes("tumhe kaun banaya hai")
+    ) {
+        speak("mujhe Shubhraj ne banaya hai");
     } else {
         // Fallback: search on Google
         let searchQuery = Message.replace(/shifra|shipra/gi, "");
-        let finalText = "I am searching for regarding " + searchQuery;
+        let finalText = "I am searching for you regarding " + searchQuery;
         speak(finalText);
         window.open(`https://www.google.com/search?q=${encodeURIComponent(searchQuery)}`, "_blank");
     }
+    content.innerText = "";
+    text.style.display = "flex";
+    voice.style.display = "none";
+    recognition.stop();
+    btn.style.display = "flex";
+    text.value = "";
+    text.focus();
+    text.placeholder = "Type your command here...";
+    text.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") {
+            takecommand(text.value.toLowerCase());
+        }
+    });
 }
